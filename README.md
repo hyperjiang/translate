@@ -1,6 +1,26 @@
 # translate
 
-Command line tool for translation.
+This is a translation tool for translating content from input file into target language.
+
+Currently support json, yaml, html and plain text formats.
+
+The supported json format is:
+
+```
+{
+    "key1": "value1",
+    "key2": "value2",
+    ...
+}
+```
+
+The supported yaml format is:
+
+```
+key1: value1
+key2: value2
+...
+```
 
 ## Installation
 

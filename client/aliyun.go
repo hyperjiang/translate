@@ -34,6 +34,7 @@ func NewAliyunClient(opts AliyunOptions) (*AliyunClient, error) {
 	return &AliyunClient{Client: client}, nil
 }
 
+// api docs: https://next.api.aliyun.com/document/alimt/2018-10-12/GetBatchTranslate
 func (c *AliyunClient) Translate(original map[string]string, sl, tl string) (map[string]string, error) {
 	jsonText, err := json.Marshal(original)
 	if err != nil {

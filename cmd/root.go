@@ -64,5 +64,16 @@ func doTranslate(client client.Client, opts options) error {
 		return nil
 	}
 
+	var yamlTranslator = translator.NewYAMLTranslator(client)
+	if err := yamlTranslator.ParseFile(opts.inputFile); err == nil {
+		if err := yamlTranslator.Translate(opts.sourceLang, opts.targetLang); err != nil {
+			return err
+		}
+		if err := yamlTranslator.SaveResult(opts.outputFile); err != nil {
+			return err
+		}
+		return nil
+	}
+
 	return nil
 }
