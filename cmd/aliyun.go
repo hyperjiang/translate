@@ -27,7 +27,7 @@ var aliyunCmd = &cobra.Command{
 		}
 
 		if opts.inputFile != "" {
-			if err := doTranslate(c, opts); err != nil {
+			if err := translate(c, opts); err != nil {
 				exit(err)
 			}
 

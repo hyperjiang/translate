@@ -8,7 +8,11 @@ import (
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/alimt"
 )
 
-const defaultAliyunRegion = "cn-shenzhen"
+const (
+	DefaultAliyunRegion = "cn-shenzhen"
+	FormatTypeText      = "text"
+	FormatTypeHTML      = "html"
+)
 
 type AliyunClient struct {
 	Client *alimt.Client
@@ -22,7 +26,7 @@ type AliyunOptions struct {
 
 func NewAliyunClient(opts AliyunOptions) (*AliyunClient, error) {
 	if opts.RegionID == "" {
-		opts.RegionID = defaultAliyunRegion
+		opts.RegionID = DefaultAliyunRegion
 	}
 
 	client, err := alimt.NewClientWithAccessKey(opts.RegionID, opts.AccessKeyID, opts.AccessSecret)
@@ -34,22 +38,19 @@ func NewAliyunClient(opts AliyunOptions) (*AliyunClient, error) {
 	return &AliyunClient{Client: client}, nil
 }
 
-// api docs: https://next.api.aliyun.com/document/alimt/2018-10-12/GetBatchTranslate
 func (c *AliyunClient) Translate(original map[string]string, sl, tl string) (map[string]string, error) {
 	jsonText, err := json.Marshal(original)
 	if err != nil {
 		return nil, err
 	}
 
-	request := alimt.CreateGetBatchTranslateRequest()
-	request.Scheme = "https"
-	request.FormatType = "text"
-	request.Scene = "general"
-	request.ApiType = "translate_standard"
-	request.SourceLanguage = sl
-	request.TargetLanguage = tl
-	request.SourceText = string(jsonText)
+	request := newBatchTranslateRequest(string(jsonText), sl, tl, FormatTypeText)
 
+	return c.BatchTranslate(request)
+}
+
+// api docs: https://next.api.aliyun.com/document/alimt/2018-10-12/GetBatchTranslate
+func (c *AliyunClient) BatchTranslate(request *alimt.GetBatchTranslateRequest) (map[string]string, error) {
 	response, err := c.Client.GetBatchTranslate(request)
 	if err != nil {
 		return nil, err
@@ -71,4 +72,17 @@ func (c *AliyunClient) Translate(original map[string]string, sl, tl string) (map
 
 func (c *AliyunClient) ListSupportedLanguages() {
 	fmt.Println("See https://help.aliyun.com/document_detail/158269.html")
+}
+
+func newBatchTranslateRequest(st, sl, tl, ft string) *alimt.GetBatchTranslateRequest {
+	request := alimt.CreateGetBatchTranslateRequest()
+	request.Scheme = "https"
+	request.Scene = "general"
+	request.ApiType = "translate_standard"
+	request.FormatType = ft
+	request.SourceLanguage = sl
+	request.TargetLanguage = tl
+	request.SourceText = st
+
+	return request
 }
