@@ -1,4 +1,4 @@
-module github.com/hyperjiang/translate
+module github.com/hyperjiang/convert
 
 go 1.16
 

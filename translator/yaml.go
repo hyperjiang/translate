@@ -3,7 +3,7 @@ package translator
 import (
 	"io/ioutil"
 
-	"github.com/hyperjiang/translate/client"
+	"github.com/hyperjiang/convert/client"
 	"gopkg.in/yaml.v2"
 )
 

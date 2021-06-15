@@ -1,34 +1,42 @@
-# translate
+# convert
 
-This is a translation tool for translating content from input file into target language.
+This is a tool for translation and file format converting.
 
-Currently support json, yaml, html and plain text formats.
+For file format, we currently support `json` and `yaml`.
 
-The supported json format is:
+For translation client, we currently use Aliyun machine translation.
+
+## Installation
+
+```
+go get -u github.com/hyperjiang/convert
+```
+
+## File converter
+
+```
+convert file -i "input-file" -o "output-file" -s json -t yaml
+```
+
+## Translator
+
+For translation, we only support simple single-layer key-value format, e.g.
 
 ```
 {
     "key1": "value1",
     "key2": "value2",
-    ...
 }
 ```
 
-The supported yaml format is:
+or
 
 ```
 key1: value1
 key2: value2
-...
 ```
 
-## Installation
-
-```
-go get -u github.com/hyperjiang/translate
-```
-
-## Use Aliyun machine translation
+### Use Aliyun machine translation
 
 Setup environment variables:
 
@@ -39,5 +47,5 @@ export ALI_ACCESS_SECRET="your-secret"
 ```
 
 ```
-translate aliyun -i "input-file" -o "output-file" -s source-language -t target-language
+convert aliyun -i "input-file" -o "output-file" -s source-language -t target-language
 ```

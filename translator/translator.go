@@ -3,7 +3,7 @@ package translator
 import (
 	"errors"
 
-	"github.com/hyperjiang/translate/client"
+	"github.com/hyperjiang/convert/client"
 )
 
 // Translator is the interface of translator
