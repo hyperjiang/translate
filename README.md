@@ -1,5 +1,8 @@
 # translate
 
+[![](https://goreportcard.com/badge/github.com/hyperjiang/translate)](https://goreportcard.com/report/github.com/hyperjiang/translate)
+[![License](https://img.shields.io/github/license/hyperjiang/translate.svg)](https://github.com/hyperjiang/translate)
+
 This is a tool for translation and file format converting.
 
 For file format, we currently support `json` and `yaml`.
@@ -47,5 +50,5 @@ export ALI_ACCESS_SECRET="your-secret"
 ```
 
 ```
-convert aliyun -i "input-file" -o "output-file" -s source-language -t target-language
+translate aliyun -i "input-file" -o "output-file" -s source-language -t target-language
 ```
