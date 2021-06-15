@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/hyperjiang/convert/client"
+	"github.com/hyperjiang/translate/client"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

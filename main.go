@@ -1,6 +1,6 @@
 package main
 
-import "github.com/hyperjiang/convert/cmd"
+import "github.com/hyperjiang/translate/cmd"
 
 func main() {
 	cmd.Execute()

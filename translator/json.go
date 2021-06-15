@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/hyperjiang/convert/client"
+	"github.com/hyperjiang/translate/client"
 )
 
 type JSONTranslator struct {

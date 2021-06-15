@@ -1,4 +1,4 @@
-# convert
+# translate
 
 This is a tool for translation and file format converting.
 
@@ -9,13 +9,13 @@ For translation client, we currently use Aliyun machine translation.
 ## Installation
 
 ```
-go get -u github.com/hyperjiang/convert
+go get -u github.com/hyperjiang/translate
 ```
 
 ## File converter
 
 ```
-convert file -i "input-file" -o "output-file"
+translate file -i "input-file" -o "output-file"
 ```
 
 ## Translator

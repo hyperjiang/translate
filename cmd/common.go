@@ -3,8 +3,8 @@ package cmd
 import (
 	"errors"
 
-	"github.com/hyperjiang/convert/client"
-	"github.com/hyperjiang/convert/translator"
+	"github.com/hyperjiang/translate/client"
+	"github.com/hyperjiang/translate/translator"
 	"github.com/rs/zerolog/log"
 )
 
