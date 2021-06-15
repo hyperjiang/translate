@@ -28,7 +28,7 @@ var fileCmd = &cobra.Command{
 			case ".yaml", ".yml":
 				yaml.Unmarshal(content, &data)
 			default:
-				log.Fatal().Msgf("unknown input file extension: %s", ext)
+				exitf("unknown input file extension: %s", ext)
 			}
 
 			var result []byte
@@ -43,7 +43,7 @@ var fileCmd = &cobra.Command{
 					exit(err)
 				}
 			default:
-				log.Fatal().Msgf("unknown output file extension: %s", ext2)
+				exitf("unknown output file extension: %s", ext2)
 			}
 
 			if err := ioutil.WriteFile(opts.outputFile, result, 0644); err != nil {

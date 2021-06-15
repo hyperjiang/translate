@@ -20,6 +20,10 @@ func exit(err error) {
 	log.Fatal().Err(err).Msg("")
 }
 
+func exitf(format string, v ...interface{}) {
+	log.Fatal().Msgf(format, v...)
+}
+
 func translate(client client.Client, opts options) error {
 	var jsonTranslator = translator.NewJSONTranslator(client)
 	if err := jsonTranslator.ParseFile(opts.inputFile); err == nil {
