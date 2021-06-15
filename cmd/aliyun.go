@@ -32,8 +32,18 @@ var aliyunCmd = &cobra.Command{
 			}
 
 			if opts.outputFile != "/dev/stdout" {
-				log.Info().Msgf("Translate successfully and save into %s", opts.outputFile)
+				log.Info().Msgf("translate successfully and save into %s", opts.outputFile)
 			}
+		} else {
+			cmd.Usage()
 		}
 	},
+}
+
+func init() {
+	aliyunCmd.PersistentFlags().StringVarP(&opts.inputFile, "input", "i", "", "the input file to be translated, must provide")
+	aliyunCmd.PersistentFlags().StringVarP(&opts.outputFile, "output", "o", "/dev/stdout", "the output path to save translated file")
+	aliyunCmd.PersistentFlags().StringVarP(&opts.sourceLang, "source", "s", "en", "source language")
+	aliyunCmd.PersistentFlags().StringVarP(&opts.targetLang, "targe", "t", "en", "target language")
+	aliyunCmd.PersistentFlags().BoolVarP(&opts.listLang, "languages", "l", false, "list available languages")
 }

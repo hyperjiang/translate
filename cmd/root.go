@@ -30,10 +30,5 @@ func init() {
 	viper.AutomaticEnv()
 
 	rootCmd.AddCommand(aliyunCmd)
-
-	rootCmd.PersistentFlags().StringVarP(&opts.inputFile, "input", "i", "", "the input file to be translated, must provide")
-	rootCmd.PersistentFlags().StringVarP(&opts.outputFile, "output", "o", "/dev/stdout", "the output path to save translated file")
-	rootCmd.PersistentFlags().StringVarP(&opts.sourceLang, "source", "s", "en", "source language")
-	rootCmd.PersistentFlags().StringVarP(&opts.targetLang, "targe", "t", "en", "target language")
-	rootCmd.PersistentFlags().BoolVarP(&opts.listLang, "languages", "l", false, "list available languages")
+	rootCmd.AddCommand(fileCmd)
 }

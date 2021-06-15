@@ -15,7 +15,7 @@ go get -u github.com/hyperjiang/convert
 ## File converter
 
 ```
-convert file -i "input-file" -o "output-file" -s json -t yaml
+convert file -i "input-file" -o "output-file"
 ```
 
 ## Translator
