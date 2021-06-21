@@ -5,7 +5,7 @@
 
 This is a tool for translation and file format converting.
 
-For file format, we currently support `json` and `yaml`.
+For file format, we currently support `json`, `yaml` and `properties`.
 
 For translation client, we currently use Aliyun machine translation.
 
@@ -37,6 +37,13 @@ or
 ```
 key1: value1
 key2: value2
+```
+
+or
+
+```
+key1=value1
+key2=value2
 ```
 
 ### Use Aliyun machine translation
