@@ -47,5 +47,16 @@ func translate(client client.Client, opts options) error {
 		return nil
 	}
 
+	var propTranslator = translator.NewPropTranslator(client)
+	if err := propTranslator.ParseFile(opts.inputFile); err == nil {
+		if err := propTranslator.Translate(opts.sourceLang, opts.targetLang); err != nil {
+			return err
+		}
+		if err := propTranslator.SaveResult(opts.outputFile); err != nil {
+			return err
+		}
+		return nil
+	}
+
 	return errors.New("unknown file format")
 }

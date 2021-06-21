@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
+	"github.com/hyperjiang/translate/translator"
+	"github.com/magiconair/properties"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
@@ -20,13 +22,23 @@ var fileCmd = &cobra.Command{
 				exit(err)
 			}
 
-			var data interface{}
+			var data map[string]string
 			ext := filepath.Ext(opts.inputFile)
 			switch ext {
 			case ".json":
-				json.Unmarshal(content, &data)
+				if err := json.Unmarshal(content, &data); err != nil {
+					exit(err)
+				}
 			case ".yaml", ".yml":
-				yaml.Unmarshal(content, &data)
+				if err := yaml.Unmarshal(content, &data); err != nil {
+					exit(err)
+				}
+			case ".properties", ".prop":
+				p, err := properties.LoadString(string(content))
+				if err != nil {
+					exit(err)
+				}
+				data = p.Map()
 			default:
 				exitf("unknown input file extension: %s", ext)
 			}
@@ -42,6 +54,8 @@ var fileCmd = &cobra.Command{
 				if result, err = yaml.Marshal(data); err != nil {
 					exit(err)
 				}
+			case ".properties", ".prop":
+				result = translator.BuildProperties(data)
 			default:
 				exitf("unknown output file extension: %s", ext2)
 			}

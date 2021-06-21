@@ -2,8 +2,10 @@ package translator
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/hyperjiang/translate/client"
+	sortmap "github.com/tg/gosortmap"
 )
 
 // Translator is the interface of translator
@@ -53,4 +55,13 @@ func translate(client client.Client, original map[string]string, sl, tl string) 
 	}
 
 	return client.Translate(original, sl, tl)
+}
+
+func BuildProperties(data map[string]string) []byte {
+	r := ""
+	for _, e := range sortmap.ByKey(data) {
+		r += fmt.Sprintf("%s=%s\n", e.Key, e.Value)
+	}
+
+	return []byte(r)
 }
