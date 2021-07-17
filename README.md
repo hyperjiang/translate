@@ -5,7 +5,7 @@
 
 This is a tool for translation and file format converting.
 
-For file format, we currently support `json`, `yaml` and `properties`.
+For file format, we currently support `json`, `yaml`, `properties` and `typescript`.
 
 For translation client, we currently use Aliyun machine translation.
 

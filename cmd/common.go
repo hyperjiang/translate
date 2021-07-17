@@ -47,6 +47,17 @@ func translate(client client.Client, opts options) error {
 		return nil
 	}
 
+	var tsTranslator = translator.NewTsTranslator(client)
+	if err := tsTranslator.ParseFile(opts.inputFile); err == nil {
+		if err := tsTranslator.Translate(opts.sourceLang, opts.targetLang); err != nil {
+			return err
+		}
+		if err := tsTranslator.SaveResult(opts.outputFile); err != nil {
+			return err
+		}
+		return nil
+	}
+
 	var propTranslator = translator.NewPropTranslator(client)
 	if err := propTranslator.ParseFile(opts.inputFile); err == nil {
 		if err := propTranslator.Translate(opts.sourceLang, opts.targetLang); err != nil {

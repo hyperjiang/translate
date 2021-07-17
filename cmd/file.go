@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"path/filepath"
+	"regexp"
+	"strings"
 
 	"github.com/hyperjiang/translate/translator"
 	"github.com/magiconair/properties"
@@ -39,6 +41,20 @@ var fileCmd = &cobra.Command{
 					exit(err)
 				}
 				data = p.Map()
+			case ".ts":
+				str := strings.Replace(string(content), "export default", "", -1)
+				str = strings.Replace(str, "'", "\"", -1)
+
+				exp := `,\s+\};?`
+				reg := regexp.MustCompile(exp)
+				m := reg.FindStringSubmatch(str)
+				if len(m) > 0 {
+					str = strings.Replace(str, m[0], "}", -1)
+				}
+
+				if err := json.Unmarshal([]byte(str), &data); err != nil {
+					exit(err)
+				}
 			default:
 				exitf("unknown input file extension: %s", ext)
 			}
@@ -56,6 +72,13 @@ var fileCmd = &cobra.Command{
 				}
 			case ".properties", ".prop":
 				result = translator.BuildProperties(data)
+			case ".ts":
+				var j []byte
+				if j, err = json.MarshalIndent(data, "", "    "); err != nil {
+					exit(err)
+				}
+				s := "export default " + string(j) + ";"
+				result = []byte(s)
 			default:
 				exitf("unknown output file extension: %s", ext2)
 			}
