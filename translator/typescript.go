@@ -54,7 +54,6 @@ func (trans *TsTranslator) SaveResult(file string) error {
 	}
 
 	s := "export default " + string(result) + ";"
-	s = strings.Replace(s, "\"", "'", -1)
 	res := []byte(s)
 
 	return ioutil.WriteFile(file, res, 0644)
